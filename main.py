@@ -88,6 +88,9 @@ class Basket(Sprite):
         if self.distance_to(fruit) <= BASKET_CATCH_DISTANCE:
             fruit.to_be_deleted = True
             self.fruit_eaten() # Try to do observer pattern
+            xx = randint(0,100)
+            if xx > 80:
+                self.fruit_eaten()
 
     def fruit_eaten(self):
         self.app.score += 1
