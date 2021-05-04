@@ -85,6 +85,9 @@ class Basket(Sprite):
             self.app.score += 1
             self.app.update_score()
 
+    def set_next_direction(self, direction):
+        self.next_direction = direction
+
 
 class BasketGame(GameApp):
     def init_game(self):
@@ -94,6 +97,20 @@ class BasketGame(GameApp):
         self.score = 0
         self.score_text = Text(self, 'Score: 0', 100, 40)
         self.fruits = []
+
+        self.command_map = {
+
+            'Left': self.get_pacman_next_direction_function(self.basket, BASKET_LEFT),
+            'Right': self.get_pacman_next_direction_function(self.basket, BASKET_RIGHT),  # second improvement Implementing the pattern
+
+        }
+
+    def get_pacman_next_direction_function(self, pacman, next_direction):
+
+        def f():
+            pacman.set_next_direction(next_direction)
+
+        return f
 
     def update_score(self):
         self.score_text.set_text('Score: ' + str(self.score))
