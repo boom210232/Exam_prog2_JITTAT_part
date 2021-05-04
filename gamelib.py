@@ -126,7 +126,7 @@ class GameApp(ttk.Frame):
         self.is_stopped = True
 
     def resume_animation(self):
-        self.stop_animation()  # first improve
+        self.stop_animation()  # first improve same as design pattern in space fighter
 
     def animate(self):
         if not self.is_stopped:
