@@ -70,20 +70,28 @@ class Basket(Sprite):
 
         self.app = app
         self.direction = None
+        self.dot_eaten_observers = []
 
     def update(self):
         if self.direction == BASKET_LEFT:
             if self.x >= BASKET_MARGIN:
                 self.x -= BASKET_SPEED
+                for i in self.dot_eaten_observers:
+                    i()
         elif self.direction == BASKET_RIGHT:
             if self.x <= CANVAS_WIDTH - BASKET_MARGIN:
                 self.x += BASKET_SPEED
+                for i in self.dot_eaten_observers:
+                    i()
 
     def check_collision(self, fruit):
         if self.distance_to(fruit) <= BASKET_CATCH_DISTANCE:
             fruit.to_be_deleted = True
-            self.app.score += 1
-            self.app.update_score()
+            self.fruit_eaten() # Try to do observer pattern
+
+    def fruit_eaten(self):
+        self.app.score += 1
+        self.app.update_score()
 
     def set_next_direction(self, direction):
         self.next_direction = direction
