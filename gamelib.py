@@ -126,7 +126,7 @@ class GameApp(ttk.Frame):
         self.is_stopped = True
 
     def resume_animation(self):
-        self.is_stopped = False
+        self.stop_animation()  # first improve
 
     def animate(self):
         if not self.is_stopped:
