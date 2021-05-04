@@ -35,13 +35,19 @@ class GameCanvasElement(GameElement):
 
         self.to_be_deleted = False
 
+    def itemconfig(self, strings: str): # Third place for design pattern
+        self.canvas.itemconfigure(self.canvas_object_id, state=strings)
+
     def show(self):
         self.is_visible = True
-        self.canvas.itemconfigure(self.canvas_object_id, state="normal")
+        # self.canvas.itemconfigure(self.canvas_object_id, state="normal")
+        self.itemconfig("normal")
 
     def hide(self):
         self.is_visible = False
-        self.canvas.itemconfigure(self.canvas_object_id, state="hidden")
+        # self.canvas.itemconfigure(self.canvas_object_id, state="hidden")
+        self.itemconfig("hidden")
+
 
     def render(self):
         if self.is_visible:
